@@ -1,27 +1,30 @@
-const { crearArchivo } = require('./multiplicar/multiplicar');
+const argv = require('./config/yargs').argv;
+const { crearArchivo, listarTabla } = require('./multiplicar/multiplicar');
 
-let base = '5';
 
-crearArchivo(base)
-    .then(archivo => { console.log(`El archivo ${archivo} fue creado exitosamente`) })
-    .catch(e => console.log(e));
-// let data = '';
+let comando = argv._[0];
+let base = argv.base;
+let limite = argv.limite;
 
-// for (let i = 1; i <= 10; i++) {
+// console.log(argv.base);
 
-//     let resultado = base * i;
-//     data += `${base} * ${i} = ${resultado}\n`;
+switch (comando) {
+    case 'listar':
 
-// }
+        listarTabla(base, limite)
+            .then(dataLista => console.log("Tabla Generada\n", dataLista))
+            .catch(e => console.log(e))
 
-// fs.writeFile(`tablas/tabla-${base}.txt`, data, (err) => {
+        break;
 
-//     if (err) {
+    case 'crear':
 
-//         throw err;
+        crearArchivo(base, limite)
+            .then(archivo => { console.log(`El archivo ${archivo} fue creado exitosamente`) })
+            .catch(e => console.log(e));
 
-//     }
+        break;
 
-//     console.log(`El archivo tabla-${base} ha sido creado con éxito`);
-
-// });
+    default:
+        break;
+}
