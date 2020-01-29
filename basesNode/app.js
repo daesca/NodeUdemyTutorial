@@ -3,7 +3,7 @@ const { crearArchivo } = require('./multiplicar/multiplicar');
 let base = '5';
 
 crearArchivo(base)
-    .then(archivo => { console.log(`El archivo ${base} fue creado exitosamente`) })
+    .then(archivo => { console.log(`El archivo ${archivo} fue creado exitosamente`) })
     .catch(e => console.log(e));
 // let data = '';
 
